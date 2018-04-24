@@ -1,0 +1,42 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"  th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+    <title>脑血管病资料</title>
+</head>
+<body>
+    <div style="width: 100%">
+        <div style="width: 100%;text-align: center;margin: 50px 0;">
+            <img th:src="@{/imgs/nao.png}" style="height: 100px" />
+        </div>
+
+        <div style="margin:0 auto;padding:0 30% 0 30%; min-width: 600px;">
+            <form class="row" id="queryForm" th:action="@{/r}" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="k" placeholder="请输入关键字如：病例 栓塞 ...">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="queryBtn">Go!</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script th:src="@{/webjars/jquery/1.12.4/jquery.js}"  ></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script>
+        $(function(){
+            $("#queryBtn").click(function(){
+                $("#queryForm").submit();
+            });
+        })
+    </script>
+</body>
+</html>

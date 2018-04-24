@@ -1,0 +1,65 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"  th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+    <title>脑血管病资料</title>
+</head>
+<body>
+    <div>
+
+        <nav class="navbar navbar-default" style="position: fixed;width: 100%;top:0px;left: 0px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <img alt="Brand" style="height: 30px;" th:src="@{/imgs/nao.png}">
+                    </a>
+                    <form class="row" id="queryForm" th:action="@{/r}" method="get">
+                        <div class="input-group" style="width:50%;margin-top:15px;text-align: center">
+                            <input type="text" class="form-control" name="k" th:value="${searchWords}" placeholder="请输入关键字...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="queryBtn">查询</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div style="width: 90%;margin: 80px auto;">
+            <div class="center-content-area" th:if="${#lists.isEmpty(result)}">
+                没有找到相关记录
+            </div>
+            <div class="center-content-area" th:each="line:${result}" th:if="${not #lists.isEmpty(result)}">
+                <div class="media">
+                    <div class="media-body">
+                        <a th:href="@{'/ljm/'+${line.doc_name}}" target="_blank">
+                            <h4 class="media-heading" th:text="${line.doc_title}"></h4>
+                        </a>
+                        <span th:text="${line.doc_auth}"></span> <span th:text="${line.doc_date}"></span>
+                    </div>
+                    <div style="height: 20px;"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script th:src="@{/webjars/jquery/1.12.4/jquery.js}"  ></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script>
+        $(function(){
+            $("#queryBtn").click(function(){
+                $("#queryForm").submit();
+            });
+        })
+    </script>
+</body>
+</html>
